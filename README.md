@@ -7,3 +7,6 @@ Course template applied to **Lockheed Martin (LMT)** and the listed **June 17, 2
 - GitHub Actions executes the notebook before every Pages deployment.
 
 Inputs and their sources are in `data/` (see `data/source_documentation.csv`). The DCF and comparable-company values come from my earlier LMT valuation.
+
+## v2 model improvement
+Section 9 of the notebook replaces the continuous dividend yield with LMT's three discrete $3.60 dividends (escrowed-dividend CRR). See `CHANGELOG.md`.
