@@ -1,0 +1,147 @@
+{
+  "model": {
+    "company": "Lockheed Martin Corporation",
+    "ticker": "LMT",
+    "valuation_date": "2026-11-09",
+    "spot": 586.63,
+    "strike": 580.0,
+    "maturity_years": 0.6027,
+    "risk_free_rate": 0.0416,
+    "dividend_yield": 0.0245,
+    "volatility": 0.3036,
+    "volatility_type": "implied",
+    "option_type": "put",
+    "exercise_style": "american",
+    "lattice_steps": 200,
+    "market_bid": 48.7,
+    "market_ask": 51.6,
+    "dcf_value": null,
+    "comps_value": null,
+    "market_mid": 50.150000000000006
+  },
+  "analyst_targets": [
+    735.0,
+    700.0,
+    620.0,
+    665.0,
+    615.0,
+    692.0,
+    600.0,
+    706.0,
+    560.0,
+    564.0,
+    600.0,
+    570.0,
+    650.0,
+    700.0,
+    690.0
+  ],
+  "analyst_stats": {
+    "count": 15,
+    "mean": 644.4666666666667,
+    "median": 650.0,
+    "std": 58.25543097510513,
+    "min": 560.0,
+    "max": 735.0
+  },
+  "valuation": {
+    "Current market": 586.63,
+    "Analyst median": 650.0
+  },
+  "states": [
+    {
+      "state": "Severe bear",
+      "quantile": 0.05,
+      "terminal_price": 562.8,
+      "subjective_weight": 0.1,
+      "option_payoff": 17.200000000000045,
+      "weighted_payoff": 1.7200000000000046
+    },
+    {
+      "state": "Bear",
+      "quantile": 0.25,
+      "terminal_price": 600.0,
+      "subjective_weight": 0.2,
+      "option_payoff": 0.0,
+      "weighted_payoff": 0.0
+    },
+    {
+      "state": "Base",
+      "quantile": 0.5,
+      "terminal_price": 650.0,
+      "subjective_weight": 0.4,
+      "option_payoff": 0.0,
+      "weighted_payoff": 0.0
+    },
+    {
+      "state": "Bull",
+      "quantile": 0.75,
+      "terminal_price": 696.0,
+      "subjective_weight": 0.2,
+      "option_payoff": 0.0,
+      "weighted_payoff": 0.0
+    },
+    {
+      "state": "Tail",
+      "quantile": 0.95,
+      "terminal_price": 714.6999999999999,
+      "subjective_weight": 0.1,
+      "option_payoff": 0.0,
+      "weighted_payoff": 0.0
+    }
+  ],
+  "valuation_weighted_expected_payoff": 1.6774117338854517,
+  "belief_decomposition": {
+    "weight_zero_payoff": 0.9,
+    "weight_positive_payoff": 0.1,
+    "weighted_terminal_payoff": 1.7200000000000046,
+    "discount_factor": 0.9752393801659577
+  },
+  "distribution_comparison": {
+    "analyst_log_dispersion": 0.09115471533314395,
+    "crr_horizon_volatility": 0.23569608183421292,
+    "message": "Analyst targets are narrower than the volatility input used by CRR."
+  },
+  "lattice": {
+    "price": 48.32861462990032,
+    "u": 1.0168058861535765,
+    "d": 0.98347188349081,
+    "p_star": 0.49737947328618226,
+    "dt": 0.0030135
+  },
+  "validation": {
+    "valid_risk_neutral_probability": true,
+    "inside_theoretical_bounds": true,
+    "put_call_parity_pass": true,
+    "convergence_pass": true,
+    "parity_residual": -4.995115432393504e-12,
+    "convergence_gap": -0.026367923351337197
+  },
+  "convergence": [
+    {
+      "steps": 25,
+      "price": 48.14585060856305
+    },
+    {
+      "steps": 50,
+      "price": 47.705932581144346
+    },
+    {
+      "steps": 100,
+      "price": 47.73454357977018
+    },
+    {
+      "steps": 200,
+      "price": 47.72674184295112
+    },
+    {
+      "steps": 500,
+      "price": 47.700373919599784
+    }
+  ],
+  "comparison": {
+    "Analyst-scenario discounted expected payoff": 1.6774117338854517,
+    "CRR risk-neutral lattice value": 48.32861462990032,
+    "Observed market midpoint": 50.150000000000006
+  }
+}
