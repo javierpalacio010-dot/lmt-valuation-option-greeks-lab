@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LMT Greeks and Model Improvement</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+:root{--navy:#0b2747;--navy2:#173f68;--ink:#10243d;--muted:#5b6f85;--bg:#eef3f8;--line:#d6e1eb;--teal:#0fa99d;--blue:#197ba6;--gold:#e2a72d;--orange:#f2762e;--red:#d94d4d;--purple:#7655b5;--green:#187457;--shadow:0 10px 28px rgba(11,39,71,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.hero{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff;padding:27px max(28px,calc((100vw - 1500px)/2));border-bottom:4px solid var(--teal)}
+.hero-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}.eyebrow{color:#ffc44f;font-size:12px;font-weight:850;letter-spacing:.16em}
+.hero h1{font-size:33px;margin:7px 0 4px;letter-spacing:-.035em}.hero p{margin:0;color:#d8e4ef;font-size:14px}.firm{text-align:right;color:#d8e4ef;font-size:12px;line-height:1.55}.firm b{display:block;color:#fff;font-size:15px}
+.nav{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.nav a{color:#fff;text-decoration:none;font-size:12px;font-weight:750;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px}.nav a.on{background:#fff;color:var(--navy)}
+main{max-width:1500px;margin:auto;padding:24px 28px 38px}.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.kpi{padding:18px 19px;min-height:120px;border-top:4px solid transparent}
+.label{font-size:10px;font-weight:850;letter-spacing:.09em;color:var(--muted)}.value{font-size:28px;font-weight:850;letter-spacing:-.035em;margin:12px 0 5px;line-height:1}.hint,.caption{font-size:11px;color:var(--muted)}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}.row.two{grid-template-columns:1.2fr .8fr}.row.half{grid-template-columns:1fr 1fr}
+.panel{padding:20px;min-width:0}.panel h2{font-size:16px;margin:0}.caption{margin:5px 0 0}.n{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#e6f6f4;color:#08786f;font-size:11px;margin-right:7px}
+.plot{height:320px;width:100%}.plot.tall{height:380px}
+table.t{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}table.t th,table.t td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right}table.t th:first-child,table.t td:first-child{text-align:left}table.t th{font-size:9px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
+.pass{color:var(--green);font-weight:850}.review{color:var(--orange);font-weight:850}
+.note{border-left:4px solid var(--gold);background:#fff9eb;padding:12px 14px;margin-top:12px;border-radius:8px;font-size:12px;line-height:1.55;color:#655020}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.check{background:#edf9f5;border:1px solid #bde2d7;color:var(--green);padding:9px;border-radius:9px;font-size:11px;font-weight:800}.check.bad{background:#fff1ec;border-color:#f5c3ad;color:#b54a1b}
+.memo p{font-size:13px;line-height:1.6;color:var(--muted)}.memo h3{font:700 23px/1.2 Georgia,serif;color:var(--navy);margin:12px 0}
+.metric{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px}.metric b{font-size:13px}
+.footer{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:18px}
+.error{background:#fff1ec;border:1px solid #f5c3ad;border-radius:12px;padding:16px}
+@media(max-width:1120px){.kpis{grid-template-columns:repeat(3,1fr)}.row,.row.two,.row.half{grid-template-columns:1fr}.firm{display:none}}
+@media(max-width:640px){.hero{padding:23px 16px}.hero h1{font-size:24px}main{padding:14px 16px}.kpis{grid-template-columns:1fr 1fr}.value{font-size:22px}.checks{grid-template-columns:1fr}table.t{font-size:11px}.tablewrap{overflow-x:auto}.footer{display:block}}
+</style></head><body>
+<header class="hero"><div class="hero-inner"><div><div class="eyebrow">MODULE 5 · GREEKS EXTENSION</div><h1>Model Improvement and Option Greeks</h1><p>How the LMT put responds to the stock price, volatility, time and interest rates, and how well the Greeks predict it</p>
+<nav class="nav"><a href="index.html">Module 4 dashboard</a><a class="on" href="greeks.html">Module 5 Greeks</a></nav></div><div class="firm" id="firmMeta"></div></div></header>
+<main id="app"><div class="card panel">Loading validated notebook results…</div></main>
+<script>
+const C={navy:'#0b2747',blue:'#197ba6',teal:'#0fa99d',gold:'#e2a72d',orange:'#f2762e',red:'#d94d4d',purple:'#7655b5',slate:'#68798e',green:'#187457'};
+const config={responsive:true,displayModeBar:false,scrollZoom:false};
+const money=(v,d=2)=>(v<0?'-$':'$')+Math.abs(Number(v)).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+const num=(v,d=4)=>Number(v).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=(v,d=1)=>(100*Number(v)).toFixed(d)+'%';
+const base={paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:'Inter,Segoe UI,Arial',size:12,color:'#10243d'},hoverlabel:{bgcolor:C.navy,bordercolor:C.navy,font:{size:13,color:'#fff'}},legend:{orientation:'h',y:-0.28,font:{size:11}},margin:{l:64,r:20,t:24,b:80},xaxis:{gridcolor:'#e2e9f0',zerolinecolor:'#cbd6e0',tickfont:{size:11,color:'#50647c'},automargin:true},yaxis:{gridcolor:'#dce5ed',zerolinecolor:'#cbd6e0',tickfont:{size:11,color:'#50647c'},automargin:true}};
+const vline=(x,color,dash,label)=>({type:'line',x0:x,x1:x,yref:'paper',y0:0,y1:1,line:{color,width:1.6,dash}});
+const vlabel=(x,text,color,y=1.02)=>({x,y,yref:'paper',text,showarrow:false,font:{size:10,color},xanchor:'left'});
+
+fetch('model_results.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('model_results.json was not generated');return r.json()}).then(D=>{
+if(!D.greeks||!D.improvement)throw Error('Greeks results are missing. Run every notebook cell, including Sections 9–14.');
+const m=D.model,G=D.greeks,I=D.improvement,R=G.risk,mult=G.contract_multiplier;
+firmMeta.innerHTML=`<b>${m.company} · ${m.ticker}</b>Valuation date: ${m.valuation_date}<br>Jun 17 2027 $${m.strike} ${m.exercise_style} ${m.option_type} · ×${mult} multiplier`;
+const kpis=[['V2 MODEL VALUE',money(G.value),`${money(G.value*mult)} per contract`,C.blue],
+ ['DELTA',num(G.delta,3),`${num(G.delta*mult,1)} shares per contract`,C.navy],
+ ['GAMMA',num(G.gamma,4),`Δ changes ${num(G.gamma*10,3)} per $10 move`,C.teal],
+ ['THETA / DAY',money(G.theta_day,3),`${money(G.theta_day*mult)} per contract per day`,C.red],
+ ['VEGA / VOL PT',money(G.vega_point,3),`${money(G.vega_point*mult)} per contract`,C.purple],
+ ['RHO / 1 PP',money(G.rho_pp,3),`${money(G.rho_pp*mult)} per contract`,C.gold]];
+const P=G.profile_S, S=P.map(z=>z.spot), spot=Number(m.spot), K=Number(m.strike);
+const prog=I.progression, val=G.validation, MF=G.multi_factor, A=G.approximation;
+const checkNames={delta_in_put_range:'Delta within [−1, 0] for a put',gamma_nonnegative:'Gamma ≥ 0 (long option)',vega_positive:'Vega > 0',rho_negative_for_put:'Rho < 0 for a put',units_reported:'Units and scaling reported',primary_vs_finite_difference_compared:'Primary vs finite difference compared',all_fd_within_tolerance:'All finite-difference checks within tolerance',approximations_vs_full_repricing_compared:'Approximations vs full repricing',same_inputs_and_valuation_date:'Same inputs and valuation date as the price',per_share_and_per_contract_distinguished:'Per-share vs per-contract shown',profile_delta_in_range:'Delta in range across the grid',profile_gamma_nonnegative:'Gamma ≥ 0 across the grid'};
+const v2checks={american_at_least_european:'American ≥ European',american_put_at_least_intrinsic:'American put ≥ intrinsic',american_convergence_pass:'American convergence (200 vs 500)',valid_risk_neutral_probability_v2:'0 < p* < 1 (v2 lattice)'};
+app.innerHTML=`<section class="kpis">${kpis.map(k=>`<div class="card kpi" style="border-top-color:${k[3]}"><div class="label">${k[0]}</div><div class="value" style="color:${k[3]}">${k[1]}</div><div class="hint">${k[2]}</div></div>`).join('')}</section>
+<section class="row two"><article class="card panel"><h2><span class="n">1</span>Model progression: initial → improved → market</h2><p class="caption">The American put value under each model version, compared with the observed bid–ask range</p><div id="progress" class="plot"></div></article>
+<article class="card panel memo"><h2><span class="n">2</span>What the improvement changed</h2><h3>Discrete $3.60 dividends add ${money(I.v2_value-I.v1_value)} to the put</h3>
+<div class="metric"><span>v1: continuous 2.45% yield (200 steps)</span><b>${money(I.v1_value)}</b></div><div class="metric"><span>v2: three dated cash dividends (500/501 avg)</span><b>${money(I.v2_value)}</b></div>
+<div class="metric"><span>Market bid / mid / ask</span><b>${money(m.market_bid)} / ${money(m.market_mid)} / ${money(m.market_ask)}</b></div>
+<div class="metric"><span>Early-exercise premium (v2)</span><b>${money(I.early_exercise_premium_v2)}</b></div>
+<div class="metric"><span>Implied vol from midpoint (v2) vs vendor</span><b>${pct(I.implied_vol_v2.mid,2)} vs ${pct(I.vendor_iv,2)}</b></div>
+<p>The dividends fall on ${I.dividends.length} ex-dates before expiration (PV ${money(I.pv_dividends)}). Pricing them as dated cash drops raises the put value and closes about ${pct((I.v2_value-I.v1_value)/(m.market_mid-I.v1_value),0)} of the gap between the initial model and the market midpoint.</p></article></section>
+<section class="row"><article class="card panel"><h2><span class="n">3</span>Delta across stock prices</h2><p class="caption">Per share. Three maturities show delta steepening as expiration approaches</p><div id="delta" class="plot"></div></article>
+<article class="card panel"><h2><span class="n">4</span>Gamma across stock prices</h2><p class="caption">Change in delta per $1 move, per share</p><div id="gamma" class="plot"></div></article>
+<article class="card panel"><h2><span class="n">5</span>Vega across stock prices</h2><p class="caption">$ per 1 vol-point change in implied volatility, per share</p><div id="vegaS" class="plot"></div></article></section>
+<section class="row"><article class="card panel"><h2><span class="n">6</span>Theta across stock prices</h2><p class="caption">$ per calendar day, per share. Positive deep in the money: dividends and the American right</p><div id="thetaS" class="plot"></div></article>
+<article class="card panel"><h2><span class="n">7</span>Theta and gamma as expiration approaches</h2><p class="caption">Stock held at the current price; dividend calendar fixed</p><div id="thetaT" class="plot"></div></article>
+<article class="card panel"><h2><span class="n">8</span>Vega across volatility levels</h2><p class="caption">$ per vol point at the current stock price</p><div id="vegaV" class="plot"></div></article></section>
+<section class="row two"><article class="card panel"><h2><span class="n">9</span>Delta-only vs delta-gamma vs full repricing</h2><p class="caption">Change in put value for stock moves from −20% to +20%. The gap between the lines is the approximation error</p><div id="approx" class="plot tall"></div></article>
+<article class="card panel"><h2><span class="n">10</span>Approximation error by move size</h2><p class="caption">Estimate minus full repricing, $ per share</p><div class="tablewrap"><table class="t"><thead><tr><th>Move</th><th>Full</th><th>Δ only err</th><th>Δ-Γ err</th></tr></thead><tbody>${A.map(a=>`<tr><td>${a.stock_move_pct>0?'+':''}${pct(a.stock_move_pct,0)}</td><td>${money(a.full_repricing)}</td><td>${money(a.error_delta_only)}</td><td>${money(a.error_delta_gamma)}</td></tr>`).join('')}</tbody></table></div>
+<div class="note">Delta-gamma tracks full repricing within ${money(Math.abs(A.find(a=>Math.abs(a.stock_move_pct-0.05)<1e-9).error_delta_gamma))} for a ±5% move, but the error grows to ${money(Math.abs(A.find(a=>Math.abs(a.stock_move_pct-0.2)<1e-9).error_delta_gamma))} at +20% because gamma itself changes as the stock moves.</div></article></section>
+<section class="row half"><article class="card panel"><h2><span class="n">11</span>Multi-factor approximation vs full repricing</h2><p class="caption">ΔV ≈ Δ·ΔS + ½Γ·ΔS² + Vega·Δσ + Θ·Δt + ρ·Δr, $ per share</p><div class="tablewrap"><table class="t"><thead><tr><th>Scenario</th><th>Δ</th><th>½Γ</th><th>Vega</th><th>Θ</th><th>ρ</th><th>Estimate</th><th>Full</th><th>Error</th></tr></thead><tbody>${MF.map(s=>`<tr><td>${s.scenario}</td><td>${num(s.term_delta,2)}</td><td>${num(s.term_gamma,2)}</td><td>${num(s.term_vega,2)}</td><td>${num(s.term_theta,2)}</td><td>${num(s.term_rho,2)}</td><td><b>${money(s.multi_factor_estimate)}</b></td><td><b>${money(s.full_repricing)}</b></td><td>${money(s.error)} (${pct(s.error_pct_of_move)})</td></tr>`).join('')}</tbody></table></div>
+<div class="note">For a small combined change the Greeks are almost exact (error ${pct(MF[0].error_pct_of_move,1)}). In the large scenario the error rises to ${pct(MF[2].error_pct_of_move,1)}: the shocks interact (vega and delta change as the stock and volatility move together), and a dividend date is crossed.</div></article>
+<article class="card panel"><h2><span class="n">12</span>Finite-difference validation</h2><p class="caption">Primary Greek vs an independent repricing with a disclosed bump</p><div class="tablewrap"><table class="t"><thead><tr><th>Greek</th><th>Primary</th><th>Finite diff.</th><th>Bump</th><th>Rel. diff</th><th></th></tr></thead><tbody>${val.map(v=>`<tr><td>${v.greek}</td><td>${num(v.primary,5)}</td><td>${num(v.finite_difference,5)}</td><td>${v.bump}</td><td>${pct(v.rel_difference,3)}</td><td class="${v.status==='PASS'?'pass':'review'}">${v.status}</td></tr>`).join('')}</tbody></table></div>
+<div class="checks">${Object.entries(G.checks).map(([k,v])=>`<div class="check ${v?'':'bad'}">${v?'✓':'!'} ${checkNames[k]||k}</div>`).join('')}${Object.entries(v2checks).map(([k,l])=>`<div class="check ${I.checks[k]?'':'bad'}">${I.checks[k]?'✓':'!'} ${l}</div>`).join('')}</div></article></section>
+<section class="row half"><article class="card panel memo"><h2><span class="n">13</span>Risk profile in contract terms</h2>
+<div class="metric"><span>Share-equivalent exposure (1 long put)</span><b>${num(R.delta_share_equivalent_per_contract,1)} shares</b></div>
+<div class="metric"><span>Delta hedge today → after a $10 drop</span><b>buy ${num(R.delta_hedge_shares_per_contract,1)} → ${num(R.hedge_shares_after_10_drop,1)} shares</b></div>
+<div class="metric"><span>1-s.d. daily stock move (σ/√252)</span><b>±${money(R.one_sd_daily_move)} → ∓${money(Math.abs(R.one_sd_daily_move_pnl_delta),0)} per contract</b></div>
+<div class="metric"><span>Time decay per day</span><b>${money(R.daily_theta_per_contract)} per contract</b></div>
+<div class="metric"><span>1 vol-point change in implied vol</span><b>±${money(R.vega_per_point_per_contract)} per contract</b></div>
+<div class="metric"><span>1 percentage-point change in rates</span><b>${money(R.rho_per_pp_per_contract)} per contract</b></div>
+<p>Delta is the dominant current sensitivity: a typical one-day move in LMT changes the contract's value about ${Math.round(Math.abs(R.one_sd_daily_move_pnl_delta/R.daily_theta_per_contract))}× more than a day of time decay. A one-vol-point move in implied volatility equals about ${Math.round(R.vega_vs_theta_days)} days of theta. Gamma is largest below the strike (around ${money(P.reduce((a,b)=>b.gamma>a.gamma?b:a).spot,0)}), so the hedge ratio changes fastest if LMT falls.</p></article>
+<article class="card panel"><h2><span class="n">14</span>Option value vs stock price</h2><p class="caption">American (v2), European (v2) and intrinsic value, per share</p><div id="value" class="plot tall"></div></article></section>
+<div class="footer"><span>All values are generated by the executed notebook from the CSV inputs. Nothing on this page is typed by hand.</span><span>Educational analysis only, not investment advice.</span></div>`;
+
+const shapes=[vline(spot,C.navy,'dot'),vline(K,C.gold,'dash')],ann=[vlabel(spot,'Spot',C.navy),vlabel(K,'Strike',C.gold,1.09)];
+const xS={...base.xaxis,title:'LMT stock price ($)',tickprefix:'$',tickformat:',.0f'};
+// 1 progression
+Plotly.newPlot('progress',[{type:'bar',x:prog.map(p=>p.model.replace(' (template, 200 steps)','<br>(200 steps)').replace(' (500 steps)','<br>(500 steps)').replace(' (500/501-step average)','<br>(500/501 avg)')),y:prog.map(p=>p.american_value),marker:{color:[C.slate,'#9aa9ba',C.blue]},text:prog.map(p=>money(p.american_value)),textposition:'outside',cliponaxis:false,hovertemplate:'%{x}<br><b>%{y:$,.2f}</b><extra></extra>',name:'Model value'}],
+ {...base,showlegend:false,margin:{l:60,r:110,t:24,b:70},yaxis:{...base.yaxis,tickprefix:'$',range:[Math.min(m.market_bid,...prog.map(p=>p.american_value))-3,m.market_ask+2],title:'Put value per share'},
+  shapes:[{type:'rect',xref:'paper',x0:0,x1:1,y0:m.market_bid,y1:m.market_ask,fillcolor:'rgba(242,118,46,.10)',line:{width:0},layer:'below'},{type:'line',xref:'paper',x0:0,x1:1,y0:m.market_mid,y1:m.market_mid,line:{color:C.orange,width:2,dash:'dash'}}],
+  annotations:[{xref:'paper',x:1.01,y:m.market_mid,text:`Market mid ${money(m.market_mid)}`,showarrow:false,xanchor:'left',font:{size:11,color:C.orange}},{xref:'paper',x:1.01,y:m.market_ask,text:`Ask ${money(m.market_ask)}`,showarrow:false,xanchor:'left',font:{size:10,color:C.slate}},{xref:'paper',x:1.01,y:m.market_bid,text:`Bid ${money(m.market_bid)}`,showarrow:false,xanchor:'left',font:{size:10,color:C.slate}}]},config);
+// 3 delta
+const DT=G.delta_by_T,dcol={'220':C.blue,'90':C.teal,'21':C.orange};
+Plotly.newPlot('delta',Object.keys(dcol).map(k=>({type:'scatter',mode:'lines',x:DT.spot,y:DT[k],name:`${k} days left`,line:{color:dcol[k],width:k==='220'?3.2:2,dash:k==='220'?'solid':'dot'},hovertemplate:`${k} days · S %{x:$,.2f}<br>Delta <b>%{y:.3f}</b><extra></extra>`})),
+ {...base,xaxis:xS,yaxis:{...base.yaxis,title:'Delta',range:[-1.05,0.05]},shapes,annotations:ann},config);
+const prof=(id,col,title,color,fmt,extra={})=>Plotly.newPlot(id,[{type:'scatter',mode:'lines',x:S,y:P.map(z=>z[col]),line:{color,width:3},fill:extra.fill||'none',fillcolor:extra.fillcolor,hovertemplate:`S %{x:$,.2f}<br>${title} <b>%{y:${fmt}}</b><extra></extra>`}],
+ {...base,showlegend:false,xaxis:xS,yaxis:{...base.yaxis,title,...(extra.y||{})},shapes,annotations:ann},config);
+prof('gamma','gamma','Gamma',C.teal,'.5f',{fill:'tozeroy',fillcolor:'rgba(15,169,157,.08)'});
+prof('vegaS','vega_point','Vega ($ per vol pt)',C.purple,'$.3f',{fill:'tozeroy',fillcolor:'rgba(118,85,181,.07)',y:{tickprefix:'$'}});
+prof('thetaS','theta_day','Theta ($ per day)',C.red,'$.4f',{y:{tickprefix:'$'}});
+// 7 theta vs time
+const T=G.profile_T;
+Plotly.newPlot('thetaT',[{type:'scatter',mode:'lines+markers',x:T.map(t=>t.days_to_expiry),y:T.map(t=>t.theta_day),name:'Theta ($/day)',line:{color:C.red,width:3},marker:{size:6},hovertemplate:'%{x} days left<br>Theta <b>%{y:$.4f}</b>/day<extra></extra>'},
+ {type:'scatter',mode:'lines',x:T.map(t=>t.days_to_expiry),y:T.map(t=>t.gamma),name:'Gamma (right axis)',yaxis:'y2',line:{color:C.teal,width:2,dash:'dot'},hovertemplate:'%{x} days left<br>Gamma <b>%{y:.5f}</b><extra></extra>'}],
+ {...base,margin:{...base.margin,r:60},xaxis:{...base.xaxis,title:'Calendar days to expiration',autorange:'reversed'},yaxis:{...base.yaxis,title:'Theta ($ per day)',tickprefix:'$'},yaxis2:{overlaying:'y',side:'right',title:'Gamma',showgrid:false,tickfont:{size:11,color:'#50647c'}}},config);
+// 8 vega vs vol
+const PV=G.profile_vol;
+Plotly.newPlot('vegaV',[{type:'scatter',mode:'lines+markers',x:PV.map(v=>Math.round(v.volatility*1000)/10),y:PV.map(v=>v.vega_point),line:{color:C.purple,width:3},marker:{size:6},hovertemplate:'σ %{x:.1f}%<br>Vega <b>%{y:$.3f}</b> per vol pt<extra></extra>'}],
+ {...base,showlegend:false,xaxis:{...base.xaxis,type:'linear',title:'Implied volatility (%)',ticksuffix:'%',dtick:5},yaxis:{...base.yaxis,title:'Vega ($ per vol pt)',tickprefix:'$',tickformat:'.3f'},shapes:[vline(m.volatility*100,C.navy,'dot')],annotations:[vlabel(m.volatility*100,'Current IV',C.navy)]},config);
+// 9 approximations (continuous lines from Greeks, full repricing from grid)
+const dS=S.map(s=>s-spot),full=P.map(z=>z.value-G.value);
+Plotly.newPlot('approx',[{type:'scatter',mode:'lines',x:S,y:full,name:'Full repricing (v2 lattice)',line:{color:C.navy,width:3.5},hovertemplate:'S %{x:$,.2f}<br>Full ΔV <b>%{y:$,.2f}</b><extra></extra>'},
+ {type:'scatter',mode:'lines',x:S,y:dS.map(d=>G.delta*d),name:'Delta only',line:{color:C.orange,width:2,dash:'dash'},hovertemplate:'S %{x:$,.2f}<br>Delta-only ΔV <b>%{y:$,.2f}</b><extra></extra>'},
+ {type:'scatter',mode:'lines',x:S,y:dS.map(d=>G.delta*d+0.5*G.gamma*d*d),name:'Delta + gamma',line:{color:C.teal,width:2.4,dash:'dot'},hovertemplate:'S %{x:$,.2f}<br>Delta-gamma ΔV <b>%{y:$,.2f}</b><extra></extra>'}],
+ {...base,xaxis:xS,yaxis:{...base.yaxis,title:'Change in put value ($ per share)',tickprefix:'$'},shapes,annotations:ann},config);
+// 14 value
+Plotly.newPlot('value',[{type:'scatter',mode:'lines',x:S,y:P.map(z=>z.value),name:'American (v2)',line:{color:C.blue,width:3.4},hovertemplate:'S %{x:$,.2f}<br>American <b>%{y:$,.2f}</b><extra></extra>'},
+ {type:'scatter',mode:'lines',x:S,y:P.map(z=>z.european_value),name:'European (v2)',line:{color:C.slate,width:2,dash:'dot'},hovertemplate:'S %{x:$,.2f}<br>European <b>%{y:$,.2f}</b><extra></extra>'},
+ {type:'scatter',mode:'lines',x:S,y:P.map(z=>z.intrinsic),name:'Intrinsic value',line:{color:C.gold,width:2,dash:'dash'},hovertemplate:'S %{x:$,.2f}<br>Intrinsic <b>%{y:$,.2f}</b><extra></extra>'},
+ {type:'scatter',mode:'markers',x:[spot],y:[G.value],name:'Today',marker:{size:12,color:C.orange,line:{color:'#fff',width:2}},hovertemplate:'Today<br>S %{x:$,.2f}<br>Value <b>%{y:$,.2f}</b><extra></extra>'}],
+ {...base,xaxis:xS,yaxis:{...base.yaxis,title:'Put value ($ per share)',tickprefix:'$'},shapes,annotations:ann},config);
+}).catch(e=>app.innerHTML=`<div class="error"><b>Dashboard results are unavailable.</b><p>${e.message}</p></div>`);
+</script></body></html>

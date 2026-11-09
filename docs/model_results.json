@@ -306,5 +306,1428 @@
     "d": 0.9895147087490516,
     "p_star": 0.4997435091596886,
     "dt": 0.0012054000000000001
+  },
+  "greeks": {
+    "model": "v2 escrowed-dividend American CRR, 500/501-step average",
+    "value": 49.0511694302742,
+    "contract_multiplier": 100,
+    "delta": -0.4282527987989476,
+    "gamma": 0.0029421597062733195,
+    "theta_year": -32.6813821406714,
+    "theta_day": -0.08953803326211343,
+    "vega": 175.16882252828302,
+    "vega_point": 1.75168822528283,
+    "rho": -155.32410273009845,
+    "rho_pp": -1.5532410273009845,
+    "bumps": {
+      "spot_pct": 0.01,
+      "sigma_primary": 0.01,
+      "sigma_check": 0.005,
+      "rate_primary": 0.001,
+      "rate_check": 0.0005,
+      "theta_days": 1
+    },
+    "table": [
+      {
+        "greek": "Delta",
+        "per_share": -0.4282527988,
+        "per_share_unit": "$ per $1 move in LMT",
+        "per_contract": -42.8252798799,
+        "per_contract_unit": "$ per $1 move (= share-equivalent exposure)"
+      },
+      {
+        "greek": "Gamma",
+        "per_share": 0.0029421597,
+        "per_share_unit": "delta per $1 move in LMT",
+        "per_contract": 0.2942159706,
+        "per_contract_unit": "share-equivalents per $1 move"
+      },
+      {
+        "greek": "Theta (annual)",
+        "per_share": -32.6813821407,
+        "per_share_unit": "$ per year",
+        "per_contract": -3268.1382140671,
+        "per_contract_unit": "$ per year"
+      },
+      {
+        "greek": "Theta (daily)",
+        "per_share": -0.0895380333,
+        "per_share_unit": "$ per calendar day",
+        "per_contract": -8.9538033262,
+        "per_contract_unit": "$ per calendar day"
+      },
+      {
+        "greek": "Vega (per 1.00)",
+        "per_share": 175.1688225283,
+        "per_share_unit": "$ per 1.00 change in sigma",
+        "per_contract": 17516.8822528283,
+        "per_contract_unit": "$ per 1.00 change in sigma"
+      },
+      {
+        "greek": "Vega (per vol point)",
+        "per_share": 1.7516882253,
+        "per_share_unit": "$ per 1 vol point",
+        "per_contract": 175.1688225283,
+        "per_contract_unit": "$ per 1 vol point"
+      },
+      {
+        "greek": "Rho (per 1.00)",
+        "per_share": -155.3241027301,
+        "per_share_unit": "$ per 1.00 change in r",
+        "per_contract": -15532.4102730098,
+        "per_contract_unit": "$ per 1.00 change in r"
+      },
+      {
+        "greek": "Rho (per 1 pp)",
+        "per_share": -1.5532410273,
+        "per_share_unit": "$ per 1 percentage point",
+        "per_contract": -155.3241027301,
+        "per_contract_unit": "$ per 1 percentage point"
+      }
+    ],
+    "benchmark": [
+      {
+        "greek": "Value",
+        "american_lattice_v2": 49.0511694303,
+        "european_closed_form": 48.5408611885,
+        "european_lattice_v2": 48.5522377225,
+        "difference_american_minus_european": 0.5103082417
+      },
+      {
+        "greek": "Delta",
+        "american_lattice_v2": -0.4282527988,
+        "european_closed_form": -0.4228444735,
+        "european_lattice_v2": 0.0,
+        "difference_american_minus_european": -0.0054083253
+      },
+      {
+        "greek": "Gamma",
+        "american_lattice_v2": 0.0029421597,
+        "european_closed_form": 0.0028835983,
+        "european_lattice_v2": 0.0,
+        "difference_american_minus_european": 5.85614e-05
+      },
+      {
+        "greek": "Theta (annual)",
+        "american_lattice_v2": -32.6813821407,
+        "european_closed_form": -31.9355906604,
+        "european_lattice_v2": 0.0,
+        "difference_american_minus_european": -0.7457914802
+      },
+      {
+        "greek": "Vega (per 1.00)",
+        "american_lattice_v2": 175.1688225283,
+        "european_closed_form": 175.0384820912,
+        "european_lattice_v2": 0.0,
+        "difference_american_minus_european": 0.1303404371
+      },
+      {
+        "greek": "Rho (per 1.00)",
+        "american_lattice_v2": -155.3241027301,
+        "european_closed_form": -176.0399300575,
+        "european_lattice_v2": 0.0,
+        "difference_american_minus_european": 20.7158273274
+      }
+    ],
+    "validation": [
+      {
+        "greek": "Delta",
+        "primary": -0.4282527988,
+        "primary_method": "lattice nodes",
+        "finite_difference": -0.4283526642,
+        "bump": "S \u00b1 $5.87 (1%)",
+        "tolerance_rel": 0.02,
+        "abs_difference": 9.98654e-05,
+        "rel_difference": 0.0002331383,
+        "status": "PASS"
+      },
+      {
+        "greek": "Gamma",
+        "primary": 0.0029421597,
+        "primary_method": "lattice nodes",
+        "finite_difference": 0.0029304468,
+        "bump": "S \u00b1 $5.87 (1%), second difference",
+        "tolerance_rel": 0.05,
+        "abs_difference": 1.17129e-05,
+        "rel_difference": 0.0039969753,
+        "status": "PASS"
+      },
+      {
+        "greek": "Gamma (via change in delta)",
+        "primary": 0.0029421597,
+        "primary_method": "lattice nodes",
+        "finite_difference": 0.0029395346,
+        "bump": "lattice delta at S \u00b1 $5.87",
+        "tolerance_rel": 0.05,
+        "abs_difference": 2.6252e-06,
+        "rel_difference": 0.0008930509,
+        "status": "PASS"
+      },
+      {
+        "greek": "Theta per day",
+        "primary": -0.0895380333,
+        "primary_method": "lattice nodes",
+        "finite_difference": -0.0895787856,
+        "bump": "valuation date + 1 calendar day",
+        "tolerance_rel": 0.05,
+        "abs_difference": 4.07523e-05,
+        "rel_difference": 0.0004549325,
+        "status": "PASS"
+      },
+      {
+        "greek": "Vega per 1.00",
+        "primary": 175.1688225283,
+        "primary_method": "repricing, \u03c3 \u00b1 1 vol pt",
+        "finite_difference": 175.1702804831,
+        "bump": "\u03c3 \u00b1 0.5 vol pt",
+        "tolerance_rel": 0.01,
+        "abs_difference": -0.0014579549,
+        "rel_difference": 8.3231e-06,
+        "status": "PASS"
+      },
+      {
+        "greek": "Rho per 1.00",
+        "primary": -155.3241027301,
+        "primary_method": "repricing, r \u00b1 10 bp",
+        "finite_difference": -155.2621644319,
+        "bump": "r \u00b1 5 bp",
+        "tolerance_rel": 0.01,
+        "abs_difference": -0.0619382982,
+        "rel_difference": 0.0003989272,
+        "status": "PASS"
+      }
+    ],
+    "bump_table": [
+      {
+        "bump_pct_of_spot": 0.0025,
+        "bump_dollars": 1.466575,
+        "fd_delta": -0.4254974649,
+        "fd_gamma": 0.0005766661,
+        "delta_vs_primary": 0.0027553339,
+        "gamma_vs_primary": -0.0023654936
+      },
+      {
+        "bump_pct_of_spot": 0.005,
+        "bump_dollars": 2.93315,
+        "fd_delta": -0.4280513646,
+        "fd_gamma": 0.0022515464,
+        "delta_vs_primary": 0.0002014342,
+        "gamma_vs_primary": -0.0006906133
+      },
+      {
+        "bump_pct_of_spot": 0.01,
+        "bump_dollars": 5.8663,
+        "fd_delta": -0.4283526642,
+        "fd_gamma": 0.0029304468,
+        "delta_vs_primary": -9.98654e-05,
+        "gamma_vs_primary": -1.17129e-05
+      },
+      {
+        "bump_pct_of_spot": 0.02,
+        "bump_dollars": 11.7326,
+        "fd_delta": -0.4285154444,
+        "fd_gamma": 0.0029290722,
+        "delta_vs_primary": -0.0002626456,
+        "gamma_vs_primary": -1.30875e-05
+      },
+      {
+        "bump_pct_of_spot": 0.05,
+        "bump_dollars": 29.3315,
+        "fd_delta": -0.4297188492,
+        "fd_gamma": 0.0029217916,
+        "delta_vs_primary": -0.0014660504,
+        "gamma_vs_primary": -2.03681e-05
+      },
+      {
+        "bump_pct_of_spot": 0.1,
+        "bump_dollars": 58.663,
+        "fd_delta": -0.4335013262,
+        "fd_gamma": 0.0029064322,
+        "delta_vs_primary": -0.0052485274,
+        "gamma_vs_primary": -3.57275e-05
+      }
+    ],
+    "vega_bumps": [
+      {
+        "bump": 0.0025,
+        "vega": 175.1706760392
+      },
+      {
+        "bump": 0.005,
+        "vega": 175.1702804831
+      },
+      {
+        "bump": 0.01,
+        "vega": 175.1688225283
+      },
+      {
+        "bump": 0.02,
+        "vega": 175.1682385512
+      },
+      {
+        "bump": 0.05,
+        "vega": 175.1494518531
+      }
+    ],
+    "rho_bumps": [
+      {
+        "bump": 0.00025,
+        "rho": -155.2553735601
+      },
+      {
+        "bump": 0.0005,
+        "rho": -155.2621644319
+      },
+      {
+        "bump": 0.001,
+        "rho": -155.3241027301
+      },
+      {
+        "bump": 0.0025,
+        "rho": -155.405175931
+      },
+      {
+        "bump": 0.005,
+        "rho": -155.4572193722
+      }
+    ],
+    "approximation": [
+      {
+        "stock_move_pct": -0.2,
+        "dS": -117.326,
+        "delta_only": 50.2451878719,
+        "delta_gamma": 70.4951761775,
+        "full_repricing": 71.9021389969,
+        "error_delta_only": -21.656951125,
+        "error_delta_gamma": -1.4069628194
+      },
+      {
+        "stock_move_pct": -0.1,
+        "dS": -58.663,
+        "delta_only": 25.1225939359,
+        "delta_gamma": 30.1850910123,
+        "full_repricing": 30.4315099365,
+        "error_delta_only": -5.3089160006,
+        "error_delta_gamma": -0.2464189242
+      },
+      {
+        "stock_move_pct": -0.05,
+        "dS": -29.3315,
+        "delta_only": 12.561296968,
+        "delta_gamma": 13.8269212371,
+        "full_repricing": 13.8611609734,
+        "error_delta_only": -1.2998640054,
+        "error_delta_gamma": -0.0342397363
+      },
+      {
+        "stock_move_pct": -0.02,
+        "dS": -11.7326,
+        "delta_only": 5.0245187872,
+        "delta_gamma": 5.2270186702,
+        "full_repricing": 5.2291994161,
+        "error_delta_only": -0.2046806289,
+        "error_delta_gamma": -0.0021807459
+      },
+      {
+        "stock_move_pct": 0.02,
+        "dS": 11.7326,
+        "delta_only": -5.0245187872,
+        "delta_gamma": -4.8220189041,
+        "full_repricing": -4.82600119,
+        "error_delta_only": -0.1985175972,
+        "error_delta_gamma": 0.0039822858
+      },
+      {
+        "stock_move_pct": 0.05,
+        "dS": 29.3315,
+        "delta_only": -12.561296968,
+        "delta_gamma": -11.2956726989,
+        "full_repricing": -11.3474358793,
+        "error_delta_only": -1.2138610887,
+        "error_delta_gamma": 0.0517631804
+      },
+      {
+        "stock_move_pct": 0.1,
+        "dS": 58.663,
+        "delta_only": -25.1225939359,
+        "delta_gamma": -20.0600968595,
+        "full_repricing": -20.4294666601,
+        "error_delta_only": -4.6931272758,
+        "error_delta_gamma": 0.3693698006
+      },
+      {
+        "stock_move_pct": 0.2,
+        "dS": 117.326,
+        "delta_only": -50.2451878719,
+        "delta_gamma": -29.9951995663,
+        "full_repricing": -33.1337802785,
+        "error_delta_only": -17.1114075934,
+        "error_delta_gamma": 3.1385807122
+      }
+    ],
+    "multi_factor": [
+      {
+        "scenario": "Small combined: S -1%, vol +1 pt, 1 day, r +10 bp",
+        "term_delta": 2.5122593935942663,
+        "term_gamma": 0.05062497076396721,
+        "term_vega": 1.7516882252828303,
+        "term_theta": -0.08953803326211343,
+        "term_rho": -0.15532410273009845,
+        "multi_factor_estimate": 4.0697104536488515,
+        "full_repricing": 4.058083730162821,
+        "error": 0.011626723486030777,
+        "error_pct_of_move": 0.0028650772776352457
+      },
+      {
+        "scenario": "Moderate combined: S -5%, vol +3 pt, 7 days, r -25 bp",
+        "term_delta": 12.561296967971334,
+        "term_gamma": 1.2656242690991804,
+        "term_vega": 5.25506467584849,
+        "term_theta": -0.626766232834794,
+        "term_rho": 0.3883102568252461,
+        "multi_factor_estimate": 18.843529936909455,
+        "full_repricing": 18.704962834351093,
+        "error": 0.1385671025583619,
+        "error_pct_of_move": 0.007408039448433849
+      },
+      {
+        "scenario": "Large combined: S -15%, vol +10 pt, 30 days, r -50 bp",
+        "term_delta": 37.683890903914,
+        "term_gamma": 11.390618421892624,
+        "term_vega": 17.516882252828303,
+        "term_theta": -2.686140997863403,
+        "term_rho": 0.7766205136504922,
+        "multi_factor_estimate": 64.68187109442201,
+        "full_repricing": 59.33214194092719,
+        "error": 5.34972915349482,
+        "error_pct_of_move": 0.09016578499426443
+      }
+    ],
+    "profile_S": [
+      {
+        "spot": 381.31,
+        "value": 200.9534528276,
+        "european_value": 196.54027008,
+        "intrinsic": 198.69,
+        "delta": -0.987480005,
+        "gamma": 0.0007622844,
+        "theta_day": 0.0513997269,
+        "vega_point": 0.0821344172
+      },
+      {
+        "spot": 388.64,
+        "value": 193.7426463091,
+        "european_value": 189.588863954,
+        "intrinsic": 191.36,
+        "delta": -0.9807989043,
+        "gamma": 0.001028352,
+        "theta_day": 0.045786886,
+        "vega_point": 0.1215638548
+      },
+      {
+        "spot": 395.98,
+        "value": 186.5755782513,
+        "european_value": 182.6881094678,
+        "intrinsic": 184.02,
+        "delta": -0.9722374776,
+        "gamma": 0.0013099558,
+        "theta_day": 0.0394075786,
+        "vega_point": 0.1717384442
+      },
+      {
+        "spot": 403.31,
+        "value": 179.4919400479,
+        "european_value": 175.8793142033,
+        "intrinsic": 176.69,
+        "delta": -0.9614947185,
+        "gamma": 0.0015952965,
+        "theta_day": 0.0324334609,
+        "vega_point": 0.2318946245
+      },
+      {
+        "spot": 410.64,
+        "value": 172.4924920936,
+        "european_value": 169.1523577575,
+        "intrinsic": 169.36,
+        "delta": -0.9487707068,
+        "gamma": 0.001865651,
+        "theta_day": 0.0252269556,
+        "vega_point": 0.301527771
+      },
+      {
+        "spot": 417.97,
+        "value": 165.5917429307,
+        "european_value": 162.5094376529,
+        "intrinsic": 162.03,
+        "delta": -0.9342986872,
+        "gamma": 0.0021052736,
+        "theta_day": 0.0181474093,
+        "vega_point": 0.3791270587
+      },
+      {
+        "spot": 425.31,
+        "value": 158.7991036236,
+        "european_value": 155.9676191048,
+        "intrinsic": 154.69,
+        "delta": -0.9179864918,
+        "gamma": 0.0023142469,
+        "theta_day": 0.0112431206,
+        "vega_point": 0.4596799745
+      },
+      {
+        "spot": 432.64,
+        "value": 152.1377091722,
+        "european_value": 149.5389537262,
+        "intrinsic": 147.36,
+        "delta": -0.9003482029,
+        "gamma": 0.0024876896,
+        "theta_day": 0.0047105428,
+        "vega_point": 0.5483099403
+      },
+      {
+        "spot": 439.97,
+        "value": 145.6051038543,
+        "european_value": 143.2165649333,
+        "intrinsic": 140.03,
+        "delta": -0.8816778343,
+        "gamma": 0.0026286224,
+        "theta_day": -0.0014354623,
+        "vega_point": 0.6382225172
+      },
+      {
+        "spot": 447.31,
+        "value": 139.2083347441,
+        "european_value": 137.0134483354,
+        "intrinsic": 132.69,
+        "delta": -0.8619697015,
+        "gamma": 0.0027426944,
+        "theta_day": -0.0072638905,
+        "vega_point": 0.7230229724
+      },
+      {
+        "spot": 454.64,
+        "value": 132.9728580243,
+        "european_value": 130.9549165538,
+        "intrinsic": 125.36,
+        "delta": -0.8414472358,
+        "gamma": 0.0028376947,
+        "theta_day": -0.0128931532,
+        "vega_point": 0.8107437528
+      },
+      {
+        "spot": 461.97,
+        "value": 126.8839385332,
+        "european_value": 125.0247972419,
+        "intrinsic": 118.03,
+        "delta": -0.8203406039,
+        "gamma": 0.0029176335,
+        "theta_day": -0.0183773465,
+        "vega_point": 0.9006351699
+      },
+      {
+        "spot": 469.3,
+        "value": 120.9513597971,
+        "european_value": 119.2356007769,
+        "intrinsic": 110.7,
+        "delta": -0.7986873573,
+        "gamma": 0.0029864961,
+        "theta_day": -0.0237865212,
+        "vega_point": 0.9854886242
+      },
+      {
+        "spot": 476.64,
+        "value": 115.1671394839,
+        "european_value": 113.5795882158,
+        "intrinsic": 103.36,
+        "delta": -0.7766024154,
+        "gamma": 0.0030482894,
+        "theta_day": -0.0292042346,
+        "vega_point": 1.0669422987
+      },
+      {
+        "spot": 483.97,
+        "value": 109.5573594406,
+        "european_value": 108.0884273583,
+        "intrinsic": 96.03,
+        "delta": -0.754080687,
+        "gamma": 0.0031028055,
+        "theta_day": -0.0346020953,
+        "vega_point": 1.1438518906
+      },
+      {
+        "spot": 491.3,
+        "value": 104.1225014595,
+        "european_value": 102.7642021099,
+        "intrinsic": 88.7,
+        "delta": -0.7311058128,
+        "gamma": 0.003150508,
+        "theta_day": -0.0399813551,
+        "vega_point": 1.2208913754
+      },
+      {
+        "spot": 498.64,
+        "value": 98.8463723001,
+        "european_value": 97.5886110117,
+        "intrinsic": 81.36,
+        "delta": -0.707807195,
+        "gamma": 0.0031905936,
+        "theta_day": -0.045300657,
+        "vega_point": 1.2925196639
+      },
+      {
+        "spot": 505.97,
+        "value": 93.7496776841,
+        "european_value": 92.5849144392,
+        "intrinsic": 74.03,
+        "delta": -0.6842769101,
+        "gamma": 0.0032224553,
+        "theta_day": -0.0505094773,
+        "vega_point": 1.3628972451
+      },
+      {
+        "spot": 513.3,
+        "value": 88.8227747664,
+        "european_value": 87.7434782341,
+        "intrinsic": 66.7,
+        "delta": -0.6605729479,
+        "gamma": 0.0032453807,
+        "theta_day": -0.055565282,
+        "vega_point": 1.4223257701
+      },
+      {
+        "spot": 520.63,
+        "value": 84.0714861732,
+        "european_value": 83.0717961418,
+        "intrinsic": 59.37,
+        "delta": -0.6367309434,
+        "gamma": 0.0032585236,
+        "theta_day": -0.0604141467,
+        "vega_point": 1.4773910849
+      },
+      {
+        "spot": 527.97,
+        "value": 79.4864575548,
+        "european_value": 78.5604383154,
+        "intrinsic": 52.03,
+        "delta": -0.612814818,
+        "gamma": 0.0032616784,
+        "theta_day": -0.065023361,
+        "vega_point": 1.5280316583
+      },
+      {
+        "spot": 535.3,
+        "value": 75.0845912335,
+        "european_value": 74.2272256397,
+        "intrinsic": 44.7,
+        "delta": -0.5889401869,
+        "gamma": 0.0032544049,
+        "theta_day": -0.0693335649,
+        "vega_point": 1.5744191384
+      },
+      {
+        "spot": 542.63,
+        "value": 70.8555793997,
+        "european_value": 70.0618155767,
+        "intrinsic": 37.37,
+        "delta": -0.5651661794,
+        "gamma": 0.0032370177,
+        "theta_day": -0.0733264899,
+        "vega_point": 1.6158515986
+      },
+      {
+        "spot": 549.97,
+        "value": 66.7964943706,
+        "european_value": 66.0621864492,
+        "intrinsic": 30.03,
+        "delta": -0.5415192716,
+        "gamma": 0.0032095474,
+        "theta_day": -0.0769750836,
+        "vega_point": 1.652378253
+      },
+      {
+        "spot": 557.3,
+        "value": 62.9140564441,
+        "european_value": 62.2347724544,
+        "intrinsic": 22.7,
+        "delta": -0.5181458841,
+        "gamma": 0.0031727173,
+        "theta_day": -0.080257842,
+        "vega_point": 1.6835002813
+      },
+      {
+        "spot": 564.63,
+        "value": 59.2030902598,
+        "european_value": 58.5750938426,
+        "intrinsic": 15.37,
+        "delta": -0.4950729617,
+        "gamma": 0.0031269379,
+        "theta_day": -0.0831628649,
+        "vega_point": 1.7092186474
+      },
+      {
+        "spot": 571.96,
+        "value": 55.6589299472,
+        "european_value": 55.0784397922,
+        "intrinsic": 8.04,
+        "delta": -0.4723687845,
+        "gamma": 0.00307304,
+        "theta_day": -0.0856893975,
+        "vega_point": 1.7291895221
+      },
+      {
+        "spot": 579.3,
+        "value": 52.275534114,
+        "european_value": 51.7392604552,
+        "intrinsic": 0.7,
+        "delta": -0.4500572749,
+        "gamma": 0.0030116018,
+        "theta_day": -0.087835737,
+        "vega_point": 1.7434093608
+      },
+      {
+        "spot": 586.63,
+        "value": 49.0575277881,
+        "european_value": 48.5621085764,
+        "intrinsic": 0.0,
+        "delta": -0.4282523107,
+        "gamma": 0.0029436571,
+        "theta_day": -0.0896023991,
+        "vega_point": 1.7516615547
+      },
+      {
+        "spot": 593.96,
+        "value": 45.9966225557,
+        "european_value": 45.5390902637,
+        "intrinsic": 0.0,
+        "delta": -0.4069669449,
+        "gamma": 0.0028699036,
+        "theta_day": -0.0909985384,
+        "vega_point": 1.7539810509
+      },
+      {
+        "spot": 601.3,
+        "value": 43.0848154613,
+        "european_value": 42.6622829983,
+        "intrinsic": 0.0,
+        "delta": -0.3862122582,
+        "gamma": 0.0027910327,
+        "theta_day": -0.0920354954,
+        "vega_point": 1.7504206178
+      },
+      {
+        "spot": 608.63,
+        "value": 40.3246932821,
+        "european_value": 39.9343165077,
+        "intrinsic": 0.0,
+        "delta": -0.3660770704,
+        "gamma": 0.002708086,
+        "theta_day": -0.0927252331,
+        "vega_point": 1.7410006025
+      },
+      {
+        "spot": 615.96,
+        "value": 37.7086838933,
+        "european_value": 37.3477480137,
+        "intrinsic": 0.0,
+        "delta": -0.3465598139,
+        "gamma": 0.0026216509,
+        "theta_day": -0.0930812779,
+        "vega_point": 1.7262751642
+      },
+      {
+        "spot": 623.29,
+        "value": 35.2309029637,
+        "european_value": 34.8957456228,
+        "intrinsic": 0.0,
+        "delta": -0.3276809113,
+        "gamma": 0.0025324932,
+        "theta_day": -0.0931224526,
+        "vega_point": 1.7150194198
+      },
+      {
+        "spot": 630.63,
+        "value": 32.8988926762,
+        "european_value": 32.588927833,
+        "intrinsic": 0.0,
+        "delta": -0.309455001,
+        "gamma": 0.0024404647,
+        "theta_day": -0.092828692,
+        "vega_point": 1.7001328498
+      },
+      {
+        "spot": 637.96,
+        "value": 30.7021720128,
+        "european_value": 30.4168658837,
+        "intrinsic": 0.0,
+        "delta": -0.2919378261,
+        "gamma": 0.002347099,
+        "theta_day": -0.0922511815,
+        "vega_point": 1.6779851702
+      },
+      {
+        "spot": 645.29,
+        "value": 28.6270930346,
+        "european_value": 28.3642732476,
+        "intrinsic": 0.0,
+        "delta": -0.2751021329,
+        "gamma": 0.002253089,
+        "theta_day": -0.0914220261,
+        "vega_point": 1.6463759679
+      },
+      {
+        "spot": 652.63,
+        "value": 26.6684548332,
+        "european_value": 26.4263758271,
+        "intrinsic": 0.0,
+        "delta": -0.2589313497,
+        "gamma": 0.0021587266,
+        "theta_day": -0.0903536279,
+        "vega_point": 1.6102300251
+      },
+      {
+        "spot": 659.96,
+        "value": 24.8225746016,
+        "european_value": 24.5992686174,
+        "intrinsic": 0.0,
+        "delta": -0.2434558944,
+        "gamma": 0.0020648593,
+        "theta_day": -0.0890760171,
+        "vega_point": 1.5702575597
+      },
+      {
+        "spot": 667.29,
+        "value": 23.0856109858,
+        "european_value": 22.8792049149,
+        "intrinsic": 0.0,
+        "delta": -0.2286575501,
+        "gamma": 0.0019716422,
+        "theta_day": -0.0875989339,
+        "vega_point": 1.5381939848
+      },
+      {
+        "spot": 674.62,
+        "value": 21.4588344361,
+        "european_value": 21.2661511595,
+        "intrinsic": 0.0,
+        "delta": -0.2145495977,
+        "gamma": 0.0018793011,
+        "theta_day": -0.0859306772,
+        "vega_point": 1.5059858889
+      },
+      {
+        "spot": 681.96,
+        "value": 19.9403441208,
+        "european_value": 19.7636036934,
+        "intrinsic": 0.0,
+        "delta": -0.2011283997,
+        "gamma": 0.0017880291,
+        "theta_day": -0.0840832476,
+        "vega_point": 1.4676157178
+      },
+      {
+        "spot": 689.29,
+        "value": 18.5170333138,
+        "european_value": 18.3547471397,
+        "intrinsic": 0.0,
+        "delta": -0.1883792353,
+        "gamma": 0.0016987372,
+        "theta_day": -0.0821050759,
+        "vega_point": 1.4235019455
+      },
+      {
+        "spot": 696.62,
+        "value": 17.1765311273,
+        "european_value": 17.0271993667,
+        "intrinsic": 0.0,
+        "delta": -0.1762433352,
+        "gamma": 0.0016116137,
+        "theta_day": -0.0800183572,
+        "vega_point": 1.3748950331
+      },
+      {
+        "spot": 703.96,
+        "value": 15.9182381111,
+        "european_value": 15.7803580643,
+        "intrinsic": 0.0,
+        "delta": -0.1647084691,
+        "gamma": 0.001526612,
+        "theta_day": -0.0778269278,
+        "vega_point": 1.3328431528
+      },
+      {
+        "spot": 711.29,
+        "value": 14.7508313595,
+        "european_value": 14.6221090287,
+        "intrinsic": 0.0,
+        "delta": -0.153831896,
+        "gamma": 0.0014440373,
+        "theta_day": -0.0755422161,
+        "vega_point": 1.2910333773
+      },
+      {
+        "spot": 718.62,
+        "value": 13.6658747466,
+        "european_value": 13.5481340153,
+        "intrinsic": 0.0,
+        "delta": -0.1435749309,
+        "gamma": 0.0013640488,
+        "theta_day": -0.0731853585,
+        "vega_point": 1.244014392
+      },
+      {
+        "spot": 725.95,
+        "value": 12.6501082311,
+        "european_value": 12.5422630576,
+        "intrinsic": 0.0,
+        "delta": -0.1338757719,
+        "gamma": 0.0012868477,
+        "theta_day": -0.0707812064,
+        "vega_point": 1.1978777185
+      },
+      {
+        "spot": 733.29,
+        "value": 11.6928568971,
+        "european_value": 11.593388926,
+        "intrinsic": 0.0,
+        "delta": -0.1246701849,
+        "gamma": 0.0012123705,
+        "theta_day": -0.0683406315,
+        "vega_point": 1.154395233
+      },
+      {
+        "spot": 740.62,
+        "value": 10.8078484901,
+        "european_value": 10.7148125083,
+        "intrinsic": 0.0,
+        "delta": -0.1160397631,
+        "gamma": 0.0011408537,
+        "theta_day": -0.0658735595,
+        "vega_point": 1.1062519624
+      },
+      {
+        "spot": 747.95,
+        "value": 9.9945622129,
+        "european_value": 9.9098449456,
+        "intrinsic": 0.0,
+        "delta": -0.1079798143,
+        "gamma": 0.0010723265,
+        "theta_day": -0.0633922017,
+        "vega_point": 1.0599214319
+      },
+      {
+        "spot": 755.29,
+        "value": 9.2272319566,
+        "european_value": 9.1497280151,
+        "intrinsic": 0.0,
+        "delta": -0.100342641,
+        "gamma": 0.0010066407,
+        "theta_day": -0.0609114019,
+        "vega_point": 1.0211711002
+      },
+      {
+        "spot": 762.62,
+        "value": 8.5113893328,
+        "european_value": 8.4399687595,
+        "intrinsic": 0.0,
+        "delta": -0.0931622934,
+        "gamma": 0.0009439451,
+        "theta_day": -0.0584425353,
+        "vega_point": 0.9736631397
+      },
+      {
+        "spot": 769.95,
+        "value": 7.8562273982,
+        "european_value": 7.7897658222,
+        "intrinsic": 0.0,
+        "delta": -0.0864884149,
+        "gamma": 0.0008842966,
+        "theta_day": -0.0559950078,
+        "vega_point": 0.9279216823
+      },
+      {
+        "spot": 777.28,
+        "value": 7.2463580042,
+        "european_value": 7.1858590134,
+        "intrinsic": 0.0,
+        "delta": -0.0802288366,
+        "gamma": 0.0008275606,
+        "theta_day": -0.0535777297,
+        "vega_point": 0.886545761
+      },
+      {
+        "spot": 784.62,
+        "value": 6.6757810724,
+        "european_value": 6.6204856212,
+        "intrinsic": 0.0,
+        "delta": -0.0743381809,
+        "gamma": 0.0007735373,
+        "theta_day": -0.0511906901,
+        "vega_point": 0.8481293683
+      },
+      {
+        "spot": 791.95,
+        "value": 6.1478268091,
+        "european_value": 6.0958766179,
+        "intrinsic": 0.0,
+        "delta": -0.0688401487,
+        "gamma": 0.0007223776,
+        "theta_day": -0.0488485771,
+        "vega_point": 0.8039891896
+      }
+    ],
+    "profile_vol": [
+      {
+        "volatility": 0.15,
+        "value": 22.1505162431,
+        "vega_point": 1.7429019446
+      },
+      {
+        "volatility": 0.175,
+        "value": 26.5179563128,
+        "vega_point": 1.7502835746
+      },
+      {
+        "volatility": 0.2,
+        "value": 30.8966832915,
+        "vega_point": 1.7521456186
+      },
+      {
+        "volatility": 0.225,
+        "value": 35.2793285705,
+        "vega_point": 1.7533938915
+      },
+      {
+        "volatility": 0.25,
+        "value": 39.6623465547,
+        "vega_point": 1.7531822406
+      },
+      {
+        "volatility": 0.275,
+        "value": 44.0456058575,
+        "vega_point": 1.7531086185
+      },
+      {
+        "volatility": 0.3,
+        "value": 48.4269051803,
+        "vega_point": 1.7518508315
+      },
+      {
+        "volatility": 0.325,
+        "value": 52.8049933157,
+        "vega_point": 1.7506170723
+      },
+      {
+        "volatility": 0.35,
+        "value": 57.1799043401,
+        "vega_point": 1.7491609548
+      },
+      {
+        "volatility": 0.375,
+        "value": 61.5502460477,
+        "vega_point": 1.747111092
+      },
+      {
+        "volatility": 0.4,
+        "value": 65.9154673987,
+        "vega_point": 1.7450456333
+      },
+      {
+        "volatility": 0.425,
+        "value": 70.2752602279,
+        "vega_point": 1.7427230935
+      },
+      {
+        "volatility": 0.45,
+        "value": 74.6289827504,
+        "vega_point": 1.7402165679
+      },
+      {
+        "volatility": 0.475,
+        "value": 78.9760709475,
+        "vega_point": 1.7373880087
+      },
+      {
+        "volatility": 0.5,
+        "value": 83.3157698117,
+        "vega_point": 1.7343512477
+      },
+      {
+        "volatility": 0.525,
+        "value": 87.6478090047,
+        "vega_point": 1.7312271274
+      },
+      {
+        "volatility": 0.55,
+        "value": 91.9717349243,
+        "vega_point": 1.7278801172
+      }
+    ],
+    "profile_T": [
+      {
+        "days_to_expiry": 220,
+        "value": 49.0575277881,
+        "delta": -0.4282523107,
+        "gamma": 0.0029436571,
+        "theta_day": -0.0896023991
+      },
+      {
+        "days_to_expiry": 200,
+        "value": 47.2205220371,
+        "delta": -0.4327473045,
+        "gamma": 0.0030922601,
+        "theta_day": -0.0957313063
+      },
+      {
+        "days_to_expiry": 180,
+        "value": 43.6800811042,
+        "delta": -0.4257876714,
+        "gamma": 0.0032242664,
+        "theta_day": -0.1036319746
+      },
+      {
+        "days_to_expiry": 150,
+        "value": 40.4036839229,
+        "delta": -0.4323515102,
+        "gamma": 0.0035297761,
+        "theta_day": -0.1165155908
+      },
+      {
+        "days_to_expiry": 120,
+        "value": 36.6813142366,
+        "delta": -0.4400128751,
+        "gamma": 0.0039407402,
+        "theta_day": -0.1338464356
+      },
+      {
+        "days_to_expiry": 90,
+        "value": 30.7339598899,
+        "delta": -0.4331346021,
+        "gamma": 0.0045100378,
+        "theta_day": -0.1613107115
+      },
+      {
+        "days_to_expiry": 75,
+        "value": 28.1817295169,
+        "delta": -0.4369347863,
+        "gamma": 0.0049536866,
+        "theta_day": -0.1803881268
+      },
+      {
+        "days_to_expiry": 60,
+        "value": 25.296923283,
+        "delta": -0.4407923034,
+        "gamma": 0.0055549502,
+        "theta_day": -0.206264076
+      },
+      {
+        "days_to_expiry": 45,
+        "value": 21.9427724487,
+        "delta": -0.4444574155,
+        "gamma": 0.0064350613,
+        "theta_day": -0.2441738363
+      },
+      {
+        "days_to_expiry": 30,
+        "value": 17.8580231289,
+        "delta": -0.4470988253,
+        "gamma": 0.0079002585,
+        "theta_day": -0.3073457244
+      },
+      {
+        "days_to_expiry": 21,
+        "value": 14.8306192108,
+        "delta": -0.4471065206,
+        "gamma": 0.0094258493,
+        "theta_day": -0.3731649629
+      },
+      {
+        "days_to_expiry": 14,
+        "value": 10.4117630295,
+        "delta": -0.4041669226,
+        "gamma": 0.0111986295,
+        "theta_day": -0.4583950907
+      },
+      {
+        "days_to_expiry": 7,
+        "value": 6.649495082,
+        "delta": -0.3792173075,
+        "gamma": 0.0155210307,
+        "theta_day": -0.6483081561
+      },
+      {
+        "days_to_expiry": 3,
+        "value": 3.5527063571,
+        "delta": -0.3304585501,
+        "gamma": 0.0225662071,
+        "theta_day": -0.9580471921
+      }
+    ],
+    "delta_by_T": {
+      "spot": [
+        381.31,
+        388.64,
+        395.98,
+        403.31,
+        410.64,
+        417.97,
+        425.31,
+        432.64,
+        439.97,
+        447.31,
+        454.64,
+        461.97,
+        469.3,
+        476.64,
+        483.97,
+        491.3,
+        498.64,
+        505.97,
+        513.3,
+        520.63,
+        527.97,
+        535.3,
+        542.63,
+        549.97,
+        557.3,
+        564.63,
+        571.96,
+        579.3,
+        586.63,
+        593.96,
+        601.3,
+        608.63,
+        615.96,
+        623.29,
+        630.63,
+        637.96,
+        645.29,
+        652.63,
+        659.96,
+        667.29,
+        674.62,
+        681.96,
+        689.29,
+        696.62,
+        703.96,
+        711.29,
+        718.62,
+        725.95,
+        733.29,
+        740.62,
+        747.95,
+        755.29,
+        762.62,
+        769.95,
+        777.28,
+        784.62,
+        791.95
+      ],
+      "220": [
+        -0.9874254052776568,
+        -0.9807635491205412,
+        -0.9720749484801889,
+        -0.9613756592729648,
+        -0.9487222092221119,
+        -0.9341768118973981,
+        -0.9180177186825033,
+        -0.9004468796472298,
+        -0.8817446976958033,
+        -0.8620401945703602,
+        -0.8416057908320007,
+        -0.8204827707379196,
+        -0.7988396390890837,
+        -0.7766312910327291,
+        -0.7540748152362409,
+        -0.7310981201500932,
+        -0.7078254482253025,
+        -0.68429734399242,
+        -0.6606222653721741,
+        -0.636807033242188,
+        -0.6129360569259501,
+        -0.5890811306704796,
+        -0.5652244558247983,
+        -0.5415563320597091,
+        -0.5181840709321535,
+        -0.49513704633121236,
+        -0.4724540398728867,
+        -0.4500994835500834,
+        -0.42828276311160535,
+        -0.40700422771704553,
+        -0.38624513331421184,
+        -0.3661000603166211,
+        -0.34659455830978514,
+        -0.32772648027152906,
+        -0.30946195349187433,
+        -0.29196060924519274,
+        -0.2751285703993733,
+        -0.2589026223574934,
+        -0.2434600734248768,
+        -0.2287070557236566,
+        -0.21454701313540953,
+        -0.20112554406999153,
+        -0.18838785851482565,
+        -0.1761827091260331,
+        -0.16472822479349655,
+        -0.15386360839672264,
+        -0.14350010002345354,
+        -0.13386071148707182,
+        -0.12466612397881607,
+        -0.11604802626945213,
+        -0.10795456407482446,
+        -0.1002443476524171,
+        -0.09319407312924918,
+        -0.08643207537937442,
+        -0.08017994332867577,
+        -0.0743271214263718,
+        -0.06880203208004324
+      ],
+      "90": [
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        -0.9891665056396854,
+        -0.9695852425685925,
+        -0.951085443865068,
+        -0.932577616084743,
+        -0.9135032232245779,
+        -0.8933951566791823,
+        -0.8718065738752119,
+        -0.8485602902992492,
+        -0.8234916147069615,
+        -0.7964299191325521,
+        -0.7678367353389517,
+        -0.737524233635056,
+        -0.7057259400731064,
+        -0.672952341353573,
+        -0.639232567384298,
+        -0.60475966929992,
+        -0.5700646908177764,
+        -0.5353255265683693,
+        -0.5007567744160875,
+        -0.466569830700138,
+        -0.43313312122681613,
+        -0.4005904730644012,
+        -0.369070088883585,
+        -0.3388069252288286,
+        -0.3099244577500936,
+        -0.28251155893753827,
+        -0.2566012040052728,
+        -0.23228407556450623,
+        -0.20957655588950744,
+        -0.18841587138078458,
+        -0.16888762788501038,
+        -0.15087881925830743,
+        -0.13439958345822423,
+        -0.1193093765378661,
+        -0.10565005538937638,
+        -0.0932531494744949,
+        -0.08210042362913741,
+        -0.07206188490987134,
+        -0.06311778882368768,
+        -0.055104028103613284,
+        -0.04801029704533082,
+        -0.04169785741000165,
+        -0.03615766927263361,
+        -0.03123764711950741,
+        -0.02695483831675831,
+        -0.02317334644961031,
+        -0.019897788559912775,
+        -0.017050115180118647,
+        -0.01458450144255831
+      ],
+      "21": [
+        -1.0000000000000036,
+        -1.0000000000000107,
+        -1.0,
+        -1.0000000000000036,
+        -0.9999999999999762,
+        -0.9999999999986793,
+        -0.9999999999152047,
+        -0.9999999975830345,
+        -0.9999999621322155,
+        -0.9999995454559154,
+        -0.9999963542425201,
+        -0.9999773460033099,
+        -0.9998921239959901,
+        -0.9995847265728011,
+        -0.9986852759886198,
+        -0.9964676465651703,
+        -0.9918139615822898,
+        -0.9832466242272935,
+        -0.9691666421503877,
+        -0.9482042587593986,
+        -0.9193041292616067,
+        -0.8822188899966792,
+        -0.8365733436069247,
+        -0.783023524527642,
+        -0.7228708480181135,
+        -0.6571071467904896,
+        -0.587976940527823,
+        -0.5171445010577495,
+        -0.44712133375920227,
+        -0.3797479825615264,
+        -0.3166101168775295,
+        -0.25925668043874117,
+        -0.2084606989189438,
+        -0.1644751266296956,
+        -0.12744046646743873,
+        -0.09704626158645105,
+        -0.07254972005839364,
+        -0.05322314068573705,
+        -0.03836974867851907,
+        -0.027248630565765153,
+        -0.01902271100201912,
+        -0.013051738888290532,
+        -0.008813168391539946,
+        -0.005856355943409792,
+        -0.0038289618632399896,
+        -0.00246717400619185,
+        -0.0015664477183723372,
+        -0.000980379665634177,
+        -0.0006046009725011365,
+        -0.0003679825252446896,
+        -0.00022091005924301094,
+        -0.00013070952062003315,
+        -7.632066461161222e-05,
+        -4.393149963057098e-05,
+        -2.49827952978056e-05,
+        -1.4154679710755766e-05,
+        -7.914365622014533e-06
+      ]
+    },
+    "risk": {
+      "value_per_share": 49.0511694302742,
+      "value_per_contract": 4905.11694302742,
+      "delta_share_equivalent_per_contract": -42.825279879894765,
+      "delta_hedge_shares_per_contract": 42.825279879894765,
+      "delta_after_10_drop": -0.4581211359021584,
+      "hedge_shares_after_10_drop": 45.812113590215844,
+      "daily_theta_per_contract": -8.953803326211343,
+      "vega_per_point_per_contract": 175.16882252828302,
+      "rho_per_pp_per_contract": -155.32410273009845,
+      "gamma_per_contract": 0.29421597062733196,
+      "one_sd_daily_move": 11.219300119350988,
+      "one_sd_daily_move_pnl_delta": -480.4696676677428,
+      "vega_vs_theta_days": 19.563621865078744
+    },
+    "checks": {
+      "delta_in_put_range": true,
+      "gamma_nonnegative": true,
+      "vega_positive": true,
+      "rho_negative_for_put": true,
+      "units_reported": true,
+      "primary_vs_finite_difference_compared": true,
+      "all_fd_within_tolerance": true,
+      "approximations_vs_full_repricing_compared": true,
+      "same_inputs_and_valuation_date": true,
+      "per_share_and_per_contract_distinguished": true,
+      "profile_delta_in_range": true,
+      "profile_gamma_nonnegative": true
+    }
   }
 }
