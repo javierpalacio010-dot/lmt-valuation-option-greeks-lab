@@ -143,5 +143,168 @@
     "Analyst-scenario discounted expected payoff": 1.6774117338854517,
     "CRR risk-neutral lattice value": 48.32861462990032,
     "Observed market midpoint": 50.150000000000006
+  },
+  "improvement": {
+    "description": "Replaced the continuous 2.45% dividend yield with three discrete, dated $3.60 cash dividends (escrowed-dividend CRR); added American convergence, early-exercise, implied-volatility and horizon checks.",
+    "dividends": [
+      {
+        "time_years": 0.06027397260273973,
+        "amount": 3.6
+      },
+      {
+        "time_years": 0.30684931506849317,
+        "amount": 3.6
+      },
+      {
+        "time_years": 0.5589041095890411,
+        "amount": 3.6
+      }
+    ],
+    "pv_dividends": 10.662587047742164,
+    "escrowed_spot": 575.9674129522579,
+    "steps": 500,
+    "v2_value": 49.0511694302742,
+    "v2_european": 48.55223772254493,
+    "early_exercise_premium_v2": 0.49893170772926965,
+    "v1_value": 48.32861462990032,
+    "v1_european": 47.72674184295112,
+    "progression": [
+      {
+        "model": "v1 initial (template, 200 steps)",
+        "dividend_treatment": "continuous yield 2.45%",
+        "american_value": 48.32861462990032,
+        "european_value": 47.72674184295112,
+        "early_exercise_premium": 0.6018727869492011,
+        "gap_to_market_mid": 1.8213853700996836
+      },
+      {
+        "model": "v1 initial (500 steps)",
+        "dividend_treatment": "continuous yield 2.45%",
+        "american_value": 48.30078632453415,
+        "european_value": 47.700373919599784,
+        "early_exercise_premium": 0.6004124049343673,
+        "gap_to_market_mid": 1.8492136754658546
+      },
+      {
+        "model": "v2 improved (500/501-step average)",
+        "dividend_treatment": "3 discrete $3.60 cash dividends",
+        "american_value": 49.0511694302742,
+        "european_value": 48.55223772254493,
+        "early_exercise_premium": 0.49893170772926965,
+        "gap_to_market_mid": 1.0988305697258056
+      }
+    ],
+    "convergence_american_v2": [
+      {
+        "steps": 25,
+        "raw_price": 49.45227756606291,
+        "avg_n_n1": 49.110638572074386,
+        "change_vs_previous": 0.0
+      },
+      {
+        "steps": 50,
+        "raw_price": 48.99282883050622,
+        "avg_n_n1": 49.11927972947137,
+        "change_vs_previous": 0.008641157396986898
+      },
+      {
+        "steps": 100,
+        "raw_price": 49.06457550676361,
+        "avg_n_n1": 49.10104018199094,
+        "change_vs_previous": -0.01823954748043377
+      },
+      {
+        "steps": 200,
+        "raw_price": 49.06652285812283,
+        "avg_n_n1": 49.0698117706564,
+        "change_vs_previous": -0.031228411334538464
+      },
+      {
+        "steps": 500,
+        "raw_price": 49.06081647505994,
+        "avg_n_n1": 49.0511694302742,
+        "change_vs_previous": -0.018642340382200473
+      },
+      {
+        "steps": 1000,
+        "raw_price": 49.05113944641407,
+        "avg_n_n1": 49.040665399627954,
+        "change_vs_previous": -0.01050403064624561
+      }
+    ],
+    "implied_vol_v2": {
+      "bid": 0.30155894613634904,
+      "mid": 0.3098374360881677,
+      "ask": 0.31811751353521567
+    },
+    "vendor_iv": 0.3036,
+    "horizon_gap_years": 0.3973,
+    "alternative_states": [
+      {
+        "state": "Severe bear",
+        "quantile": 0.05,
+        "subjective_weight": 0.1,
+        "terminal_price_12m": 562.8,
+        "terminal_price_horizon_scaled": 572.149513912957,
+        "payoff_scaled": 7.850486087043009,
+        "weighted_payoff_scaled": 0.7850486087043009
+      },
+      {
+        "state": "Bear",
+        "quantile": 0.25,
+        "subjective_weight": 0.2,
+        "terminal_price_12m": 600.0,
+        "terminal_price_horizon_scaled": 594.6519982574038,
+        "payoff_scaled": 0.0,
+        "weighted_payoff_scaled": 0.0
+      },
+      {
+        "state": "Base",
+        "quantile": 0.5,
+        "subjective_weight": 0.4,
+        "terminal_price_12m": 650.0,
+        "terminal_price_horizon_scaled": 624.0422643930976,
+        "payoff_scaled": 0.0,
+        "weighted_payoff_scaled": 0.0
+      },
+      {
+        "state": "Bull",
+        "quantile": 0.75,
+        "subjective_weight": 0.2,
+        "terminal_price_12m": 696.0,
+        "terminal_price_horizon_scaled": 650.296943447479,
+        "payoff_scaled": 0.0,
+        "weighted_payoff_scaled": 0.0
+      },
+      {
+        "state": "Tail",
+        "quantile": 0.95,
+        "subjective_weight": 0.1,
+        "terminal_price_12m": 714.6999999999999,
+        "terminal_price_horizon_scaled": 660.7718415664896,
+        "payoff_scaled": 0.0,
+        "weighted_payoff_scaled": 0.0
+      }
+    ],
+    "alternative_belief_value": 0.7656103185529299,
+    "checks": {
+      "valid_risk_neutral_probability_v2": true,
+      "american_at_least_european": true,
+      "american_put_at_least_intrinsic": true,
+      "put_below_strike": true,
+      "bid_not_above_ask": true,
+      "rate_and_vol_in_decimal_form": true,
+      "american_convergence_pass": true,
+      "escrowed_spot_positive": true
+    },
+    "warnings": {
+      "analyst_horizon_alignment": "WARNING: 12-month targets vs 0.60-year option (gap 0.40 years > 0.25). Disclosed; see 9.2.",
+      "wide_spread": "WARNING: bid-ask spread is 5.8% of the midpoint; the midpoint is a mechanical reference, not an executable price.",
+      "estimated_dividends": "NOTE: 2 of 3 dividends inside the option life are estimated, not declared."
+    },
+    "u": 1.010596397565635,
+    "d": 0.9895147087490516,
+    "p_star": 0.4997435091596886,
+    "dt": 0.0012054000000000001
   }
 }
