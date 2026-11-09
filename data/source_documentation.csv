@@ -8,9 +8,10 @@ Option ask,51.60,2026-11-09,Yahoo Finance LMT options chain,Spread $2.90 = 5.8% 
 Open interest / volume,99 / 5,2026-11-09,Yahoo Finance LMT options chain,Last trade in this contract 2026-11-05 ($51.25) so the last price is stale; bid/ask used instead
 Implied volatility,0.3036,2026-11-09,Yahoo Finance LMT options chain,Vendor-reported implied volatility for this contract (vendor model not disclosed). The notebook also backs out its own American-lattice implied volatility from the midpoint as a check
 Risk-free rate,0.0416,2026-11-05,FRED DGS6MO (4.19%) and DGS1 (4.28%),Linear interpolation to 0.603 years = 4.21% bond-equivalent; converted to continuous compounding: 2*ln(1+0.0421/2) = 0.0416. Latest FRED observation available on the valuation date (2026-11-05)
-Dividend yield,0.0245,2026-11-09,Yahoo Finance dividend announcement; MarketBeat,Current quarterly dividend $3.60 x 4 = $14.40 / $586.63 spot = 2.45% treated as a continuous yield
+Dividend yield (initial model),0.0245,2026-11-09,Yahoo Finance dividend announcement; MarketBeat,Current quarterly dividend $3.60 x 4 = $14.40 / $586.63 spot = 2.45% treated as a continuous yield (initial model v1)
+Discrete dividends (improved model),3 x $3.60,2026-11-09,data/dividends.csv,Dec 1 2026 ex-date declared; Mar 1 and Jun 1 2027 ex-dates estimated from LMT's quarterly cycle (model improvement v2)
 Analyst targets,15 targets,2026-11-09,MarketBeat LMT forecast page (Benzinga data); Benzinga LMT price targets,Most recent target per brokerage published within 6 months of the valuation date; all 12-month horizon; excluded reports listed in data/analyst_targets_excluded.csv
 Analyst consensus (reference only),647.00,2026-11-09,MarketBeat LMT forecast page,23-analyst published mean (high $735 / low $517) - shown for reference only; never entered as an individual target
 DCF value,PENDING,2026-11-09,Student model (FIN 450 Module 2 / Case 3 LMT DCF),Equity value per diluted share - TO BE ENTERED FROM MY PRIOR DCF
 Comparable value,PENDING,2026-11-09,Student model (FIN 450 Case 3 comparable-company analysis),Equity value per diluted share - TO BE ENTERED FROM MY PRIOR COMPS
-Lattice steps,200,2026-11-09,Model setting,Template default
+Lattice steps,200,2026-11-09,Model setting,Template default for the initial model; improved model and Greeks use 500 steps

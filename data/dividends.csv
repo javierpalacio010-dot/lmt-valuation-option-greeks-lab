@@ -1,0 +1,4 @@
+ex_date,amount,status,source
+2026-12-01,3.60,declared,Yahoo Finance LMT quote page (dividend announcement: $3.60 cash dividend; ex-date Dec. 1 2026)
+2027-03-01,3.60,estimated,Assumed: LMT's usual quarterly ex-date cycle (about Mar 1 / Jun 1 / Sep 1 / Dec 1); amount held at the current $3.60 rate
+2027-06-01,3.60,estimated,Assumed: LMT's usual quarterly ex-date cycle; amount held at the current $3.60 rate
