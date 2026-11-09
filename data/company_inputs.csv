@@ -1,0 +1,2 @@
+company,ticker,valuation_date,spot,strike,maturity_years,risk_free_rate,dividend_yield,volatility,volatility_type,option_type,exercise_style,lattice_steps,market_bid,market_ask,dcf_value,comps_value
+Lockheed Martin Corporation,LMT,2026-11-09,586.63,580,0.6027,0.0416,0.0245,0.3036,implied,put,american,200,48.70,51.60,,

@@ -1,0 +1,16 @@
+input_name,value,observation_date,source,method_or_note
+Spot price,586.63,2026-11-09,Yahoo Finance LMT quote (NYSE / Nasdaq real-time),Last trade at 12:33:41 PM ET on 2026-11-09 - captured at the same time as the option quotes (MarketBeat showed $586.55 at 12:33 PM). Prior close 2026-11-06: $566.43
+Option contract,LMT270617P00580000,2026-11-09,Yahoo Finance LMT options chain (Jun 17 2027 expiry),American-style listed equity put; strike $580; expiration Thursday 2027-06-17 (Friday 2027-06-18 is the Juneteenth holiday); contract multiplier 100 shares
+Strike,580,2026-11-09,Yahoo Finance LMT options chain,Nearest-the-money June 2027 put with meaningful open interest (99 contracts); spot/strike = 1.011
+Maturity (years),0.6027,2026-11-09,Calculated,220 calendar days from 2026-11-09 to 2027-06-17 divided by 365
+Option bid,48.70,2026-11-09,Yahoo Finance LMT options chain,Quote delayed up to 15 minutes; captured about 12:35 PM ET on the valuation date
+Option ask,51.60,2026-11-09,Yahoo Finance LMT options chain,Spread $2.90 = 5.8% of the midpoint - midpoint treated as a mechanical reference rather than an executable price
+Open interest / volume,99 / 5,2026-11-09,Yahoo Finance LMT options chain,Last trade in this contract 2026-11-05 ($51.25) so the last price is stale; bid/ask used instead
+Implied volatility,0.3036,2026-11-09,Yahoo Finance LMT options chain,Vendor-reported implied volatility for this contract (vendor model not disclosed). The notebook also backs out its own American-lattice implied volatility from the midpoint as a check
+Risk-free rate,0.0416,2026-11-05,FRED DGS6MO (4.19%) and DGS1 (4.28%),Linear interpolation to 0.603 years = 4.21% bond-equivalent; converted to continuous compounding: 2*ln(1+0.0421/2) = 0.0416. Latest FRED observation available on the valuation date (2026-11-05)
+Dividend yield,0.0245,2026-11-09,Yahoo Finance dividend announcement; MarketBeat,Current quarterly dividend $3.60 x 4 = $14.40 / $586.63 spot = 2.45% treated as a continuous yield
+Analyst targets,15 targets,2026-11-09,MarketBeat LMT forecast page (Benzinga data); Benzinga LMT price targets,Most recent target per brokerage published within 6 months of the valuation date; all 12-month horizon; excluded reports listed in data/analyst_targets_excluded.csv
+Analyst consensus (reference only),647.00,2026-11-09,MarketBeat LMT forecast page,23-analyst published mean (high $735 / low $517) - shown for reference only; never entered as an individual target
+DCF value,PENDING,2026-11-09,Student model (FIN 450 Module 2 / Case 3 LMT DCF),Equity value per diluted share - TO BE ENTERED FROM MY PRIOR DCF
+Comparable value,PENDING,2026-11-09,Student model (FIN 450 Case 3 comparable-company analysis),Equity value per diluted share - TO BE ENTERED FROM MY PRIOR COMPS
+Lattice steps,200,2026-11-09,Model setting,Template default
