@@ -53,7 +53,6 @@ cd docs && python -m http.server 8000   # open http://localhost:8000 and /greeks
 
 Changing any CSV value and re-running the notebook regenerates every number on both dashboards. Nothing on the dashboards is typed by hand.
 
-## Canvas submission template
 
 - **GitHub Repository:** https://github.com/javierpalacio010-dot/lmt-valuation-option-greeks-lab
 - **Published Dashboard:** https://javierpalacio010-dot.github.io/lmt-valuation-option-greeks-lab/
