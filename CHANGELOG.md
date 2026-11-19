@@ -1,5 +1,9 @@
 # Changelog / revision notes
 
+## v3.1: equity valuation inputs completed
+- Entered my prior LMT valuations in `data/company_inputs.csv`: DCF $659 per diluted share (Case 3, valued 2026-09-30) and comparable-company value $584 (Case 1, valued 2026-09-04). Sources and methods are in `data/source_documentation.csv`.
+- Completed the Equity Valuation paragraph of the memo with these values and removed the draft note. Re-ran the notebook: only the dashboard's DCF and comps figures change. Every option value, Greek and check is unchanged.
+
 ## v3: Module 5 Greeks extension
 - **Greeks (notebook Section 10):** delta, gamma and theta read from the v2 lattice nodes; vega and rho from central-difference repricing (σ ± 1 vol point, r ± 10 bp). All use the same inputs, model and valuation date as the reported $49.05 value. Units: delta and gamma per $1, theta per year and per calendar day, vega and rho per 1.00 and per 1 point. Per-share and per-contract (×100) values are reported separately.
 - **Validation (Section 11):** independent central finite differences (S ± 1%, valuation date + 1 day, σ ± 0.5 point, r ± 5 bp). All are within tolerance (largest relative difference 0.4%). A bump-size stability table shows lattice noise for bumps under 0.5%. A closed-form European benchmark on the escrowed spot explains the differences through the early-exercise right.

@@ -15,8 +15,8 @@
     "lattice_steps": 200,
     "market_bid": 48.7,
     "market_ask": 51.6,
-    "dcf_value": null,
-    "comps_value": null,
+    "dcf_value": 659.0,
+    "comps_value": 584.0,
     "market_mid": 50.150000000000006
   },
   "analyst_targets": [
@@ -46,6 +46,8 @@
   },
   "valuation": {
     "Current market": 586.63,
+    "Comparable companies": 584.0,
+    "Student DCF": 659.0,
     "Analyst median": 650.0
   },
   "states": [
