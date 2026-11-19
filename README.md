@@ -63,5 +63,5 @@ Changing any CSV value and re-running the notebook regenerates every number on b
 - **Primary Analytical Claim:** Under my assumptions, the put trades about $1.10 (2.2%) above my v2 model value but inside the bid-ask spread, so the market is pricing roughly 31% volatility rather than a clear mispricing.
 - **Most Important Greek:** Delta, −0.428 per share ($ per $1 move in LMT; −42.8 share-equivalents per contract). A typical ±$11 daily move changes the contract by about $480.
 - **Measurable Reversal Condition:** If the contract's midpoint implies a volatility outside the 30.16%–31.81% bid-ask IV band measured here, or LMT closes below $535, I would rerun and revisit the conclusion.
-- **AI-Use Disclosure:** I used Claude for gathering inputs, debugging. 
+- **AI-Use Disclosure:** I used Claude for gathering info, debugging, and guidance through fixing the issues with the upload 
 
