@@ -58,7 +58,7 @@ Changing any CSV value and re-running the notebook regenerates every number on b
 - **GitHub Repository:** https://github.com/javierpalacio010-dot/lmt-valuation-option-greeks-lab
 - **Published Dashboard:** https://javierpalacio010-dot.github.io/lmt-valuation-option-greeks-lab/
 - **Company and Ticker:** Lockheed Martin Corporation (LMT)
-- **Selected Option:** Put, $580 strike, expires June 17 2027, American exercise, 100-share multiplier
+- **Selected Option:** Put, $580 strike, expires in June 17 2027, American exercise, 100-share multiplier
 - **Model Improvement:** Replaced the continuous dividend yield with LMT's three dated $3.60 cash dividends (escrowed-dividend CRR). This raised the put value from $48.33 to $49.05, inside the $48.70–$51.60 market spread.
 - **Primary Analytical Claim:** Under my assumptions, the put trades about $1.10 (2.2%) above my v2 model value but inside the bid-ask spread, so the market is pricing roughly 31% volatility rather than a clear mispricing.
 - **Most Important Greek:** Delta, −0.428 per share ($ per $1 move in LMT; −42.8 share-equivalents per contract). A typical ±$11 daily move changes the contract by about $480.
